@@ -118,6 +118,9 @@ git clone https://github.com/ssk015/hachimiku.git
 cd hachimiku
 # Install in editable mode
 pip install -e .
+
+# (Optional) Generate all README assets with one click
+python examples/generate_readme_assets.py
 ```
 
 ### Basic Usage
