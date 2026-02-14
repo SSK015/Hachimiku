@@ -1,0 +1,37 @@
+# Hachimiku Project Development Guidelines
+
+You are an expert developer for the Hachimiku visualization library. Hachimiku is a Python plotting library designed for high academic quality, unified color management, and modular chart design.
+
+## Project Architecture
+- `hachimiku/charts/`: Core chart implementations (Bar, Line, CDF, Combo, Area).
+- `hachimiku/colors/`: Color palettes, preset management, and showcase utilities.
+- `hachimiku/core/`: Foundation tools (`auto_fontsize`, `setup_matplotlib_style`, `LayoutManager`, `setup_spines`).
+- `examples/`: Gallery of chart examples and README asset generation scripts.
+- `docs/`: Detailed usage documentation in Markdown.
+
+## Coding Principles
+1. **Object-Oriented Design**: All chart types must be encapsulated within classes in the `hachimiku.charts` module (e.g., `BarChart`).
+2. **High Configurability**: Methods should provide extensive parameters (e.g., `figsize`, `fontsize`, `grid`, `legend_loc`) with sensible defaults.
+3. **Style Consistency**: Always call `core.utils.setup_matplotlib_style()` to ensure a unified look across all plots.
+4. **Auto-scaling**: Use `auto_fontsize(fig, base_size)` to dynamically adjust font sizes based on the figure dimensions.
+5. **Backward Compatibility**: Use `**kwargs` to handle deprecated parameter names when updating method signatures.
+6. **Subplot Support**: Always handle the `ax` parameter to allow plotting into externally provided Axes objects.
+
+## Color Management
+- Prefer the built-in `academic_vivid` color preset for most use cases.
+- All color retrieval should go through `hachimiku.colors.palettes.get_colors()`, supporting the `color_preset` argument.
+
+## Documentation & Standards
+- Follow the **Google Python Style Guide** for Docstrings (including Args and returns).
+- When adding new features, ensure corresponding documentation in `docs/` is updated.
+- Use `numpy` for data manipulation where performance or array operations are needed.
+
+## Common Commands
+- **Run Examples**: `python examples/bar_chart_gallery.py`
+- **Update Assets**: `python examples/generate_readme_assets.py`
+- **Editable Install**: `pip install -e .`
+
+## Important Technical Details
+- Support `save_path` for direct exports at 300 DPI (`bbox_inches='tight'`).
+- The `show` parameter should default to `True` but only trigger `plt.show()` if the `ax` was not externally provided (standalone mode).
+- Maintain rigorous spine management using `setup_spines(ax, ...)`.
